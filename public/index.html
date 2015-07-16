@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Podcast Express</title>
+	<link rel="stylesheet" href="normalize.css">
+	<link rel="stylesheet" href="skeleton.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body class="ng-scope" ng-app="app">
+
+
+<h1 id="hello">True Story Podcast</h1>
+<hr>
+
+<!-- PLANGULAR DIRECTIVE INSTANCE -->
+<div plangular="https://soundcloud.com/truestorytime/tracks">
+
+<!-- PLAYER -->
+  <div class="play-bar">
+
+    <button ng-click="playPause()" title="Play/Pause" class="play-button">
+      <svg ng-if="player.playing !== track.src" class="icon geomicon" data-icon="play" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 L28 16 L4 28 z "></path></svg>
+      <svg ng-if="player.playing === track.src" class="icon geomicon" data-icon="pause" viewBox="0 0 32 32" width="32" height="32" style="fill:currentcolor"><path d="M4 4 H12 V28 H4 z M20 4 H28 V28 H20 z "></path></svg>
+    </button>
+
+    <span>{{track.title}}</span>
+    <progress ng-value="currentTime / duration || 0">
+    	{{ currentTime / duration || 0 }}
+    </progress>
+    <samp class="h6">{{ currentTime | hhmmss }} / {{ duration | hhmmss }}</samp>
+
+  </div>
+
+  <hr>
+
+  <div ng-controller="TrackController">
+
+  <!-- SEARCH -->
+
+	  <form>
+      <!-- <button ng-repeat="track in tracks">{{ track.tag_list.split(" ")[0]}}</button> -->
+	    <input type="text" placeholder="Search" ng-model="searchPods">
+	  </form>
+
+  <!-- TAGS -->
+
+  <div class="form-group">
+    <label>Search By Category</label>
+    <select class="form-control" ng-model="searchPods">
+     <option value="">All Tags</option>
+     <option ng-repeat="track in tracks" ng-value="track.tag_list.split(" ").forEach(tag) {
+        track.tag_list.split(" ")[tag]
+   }[0]">{{ track.tag_list.split(" ")[0] }}</option>
+    </select>
+  </div>
+
+
+	<!-- TABLE -->
+
+    <table>
+
+      <thead>
+        <tr>
+          <th> 
+            <span ng-click="sortType= 'title'; sortReverse = !sortReverse" ng-class="{'bold-true': sortType == 'title'}"> 
+              Title
+              <span ng-show="sortType == 'title' && sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'title' && !sortReverse">&#9650;</span>
+            </span>
+          </th>
+          <th> 
+            <span ng-click="sortType= 'created_at'; sortReverse = !sortReverse" ng-class="{'bold-true': sortType == 'date'}"> 
+              Date
+              <span ng-show="sortType == 'created_at' && sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'created_at' && !sortReverse">&#9650;</span>
+            </span>
+          </th>
+          <th> 
+            <span ng-click="sortType= 'duration'; sortReverse = !sortReverse" ng-class="{'bold-true': sortType == 'duration'}"> 
+            Duration
+              <span ng-show="sortType == 'duration' && sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'duration' && !sortReverse">&#9650;</span>                 
+            </span>
+          </th>
+ <!--          <th> 
+            <span ng-click="sortType= 'tag_list'; sortReverse = !sortReverse" ng-class="{'bold-true': sortType == 'tag_list'}"> 
+            Tags
+              <span ng-show="sortType == 'tag_list' && sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'tag_list' && !sortReverse">&#9650;</span>                 
+            </span>
+          </th> -->
+          <th> 
+            <span ng-click="sortType= 'src'; sortReverse = !sortReverse" ng-class="{'bold-true': sortType == 'src'}"> 
+            Play
+              <span ng-show="sortType == 'src' && sortReverse">&#9660;</span>
+              <span ng-show="sortType == 'src' && !sortReverse">&#9650;</span>                 
+            </span>
+          </th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr ng-repeat="track in tracks | orderBy:sortType:sortReverse | filter:searchPods">
+          <td> {{ track.title      }}  </td>
+          <td> {{ track.created_at.split(" ")[0] }}  </td>
+          <td> {{ track.duration / 1000 | hhmmss  }}  </td>
+          <!-- <td> {{ track.tag_list.split(" ")[0]  }}  </td> -->
+          <td><button
+        ng-click="playPause(tracks.indexOf(track))"
+        ng-class="{'active': player.playing === track.src}">
+        <svg width="30" height="30"><path d="M4 4 L28 16 L4 28 z "></path></svg>
+            </button></td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+
+<script src="jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+<script src="http://d2v52k3cl9vedd.cloudfront.net/plangular/3.1.0/plangular.min.js"></script>
+<script src="/main.js"></script>
+	
+</body>
+</html>
