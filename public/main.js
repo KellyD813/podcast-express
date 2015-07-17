@@ -1,12 +1,13 @@
-console.log("linked");
-
 (function () {
 
-    var app = angular.module('app', ['plangular'])
+    var app = angular.module('app', ['plangular']).filter('getTag', function() {
+        return function(str) {
+            return str.match(/(?:[^\s"]+|"[^"]*")+/g)[0].replace(/"/g, "");
+        };
+    });
 
     app.config(function(plangularConfigProvider){
       plangularConfigProvider.clientId = "56dbf65179579b2fb83032d13230bbdf";
-      // plangularConfigProvider.clientId = process.env.SOUNDCLOUD_CLIENT_ID;
     });
 
     app.controller('TrackController', function($scope) {

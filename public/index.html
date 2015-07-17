@@ -40,7 +40,6 @@
   <!-- SEARCH -->
 
 	  <form>
-      <!-- <button ng-repeat="track in tracks">{{ track.tag_list.split(" ")[0]}}</button> -->
 	    <input type="text" placeholder="Search" ng-model="searchPods">
 	  </form>
 
@@ -49,13 +48,10 @@
   <div class="form-group">
     <label>Search By Category</label>
     <select class="form-control" ng-model="searchPods">
-     <option value="">All Tags</option>
-     <option ng-repeat="track in tracks" ng-value="track.tag_list.split(" ").forEach(tag) {
-        track.tag_list.split(" ")[tag]
-   }[0]">{{ track.tag_list.split(" ")[0] }}</option>
+      <option value="">All Tags</option>
+      <option ng-repeat="track in tracks">{{ track.tag_list | getTag }}</option>
     </select>
   </div>
-
 
 	<!-- TABLE -->
 
@@ -84,13 +80,6 @@
               <span ng-show="sortType == 'duration' && !sortReverse">&#9650;</span>                 
             </span>
           </th>
- <!--          <th> 
-            <span ng-click="sortType= 'tag_list'; sortReverse = !sortReverse" ng-class="{'bold-true': sortType == 'tag_list'}"> 
-            Tags
-              <span ng-show="sortType == 'tag_list' && sortReverse">&#9660;</span>
-              <span ng-show="sortType == 'tag_list' && !sortReverse">&#9650;</span>                 
-            </span>
-          </th> -->
           <th> 
             <span ng-click="sortType= 'src'; sortReverse = !sortReverse" ng-class="{'bold-true': sortType == 'src'}"> 
             Play
@@ -106,7 +95,6 @@
           <td> {{ track.title      }}  </td>
           <td> {{ track.created_at.split(" ")[0] }}  </td>
           <td> {{ track.duration / 1000 | hhmmss  }}  </td>
-          <!-- <td> {{ track.tag_list.split(" ")[0]  }}  </td> -->
           <td><button
         ng-click="playPause(tracks.indexOf(track))"
         ng-class="{'active': player.playing === track.src}">
