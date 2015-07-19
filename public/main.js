@@ -1,9 +1,19 @@
 (function () {
 
-    var app = angular.module('app', ['plangular']).filter('getTag', function() {
+    var app = angular.module('app', ['plangular'])
+
+    .filter('getTag', function() {
         return function(str) {
             return str.match(/(?:[^\s"]+|"[^"]*")+/g)[0].replace(/"/g, "");
         };
+    })
+
+    .filter('fixDate', function() {
+        return function(str) {
+            var ary = str.split(" ")[0].split("/");
+            ary.push(ary.shift());
+            return ary.join("/");
+        }
     });
 
     app.config(function(plangularConfigProvider){
@@ -20,5 +30,9 @@
         $scope.searchPods   = '';
     })
 
+    
+
 
 })();
+
+
