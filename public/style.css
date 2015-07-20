@@ -294,8 +294,6 @@ button:focus {
 	}
 
 	.tabs {
-		/* added to fix Firefox issue */
-		table-layout: fixed;
 		display: table; 
 		width: 100%;
 		text-align: left;
@@ -314,8 +312,6 @@ button:focus {
 	}
 
 	.track {
-		/* added to fix Firefox issue */
-		table-layout: fixed;
 		display: table;
 	}
 
