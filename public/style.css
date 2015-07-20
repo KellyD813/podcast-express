@@ -74,6 +74,7 @@ img:hover {
 }
 
 /* Main */
+
 .main {
 	max-width: 960px;
 	margin-right: auto;
@@ -81,6 +82,7 @@ img:hover {
 }
 
 /* Controls */
+
 .controls {
 	position: fixed;
 	bottom: 0;
@@ -97,7 +99,6 @@ img:hover {
 	margin-top: .5em;
 }
 
-/* Progress */
 progress {
   cursor: pointer;
   border: 0;
@@ -174,6 +175,13 @@ progress::-moz-progress-bar {
 
 .form-group select:focus {
 	 outline:0;
+}
+
+/* This removes default arrow on Firefox select tag */
+select {
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
 }
 
 /* Filters */
@@ -257,7 +265,6 @@ button:focus {
 	padding-right: 6px;
 	margin-right: 3px;
 }
-
 
 /* Media Queries */
 
