@@ -30,6 +30,22 @@
         $scope.searchPods   = '';
     })
 
+    $('.PodQuest').click(function() {
+      $('.modal').toggleClass('is-open');
+    });
+
+    $('.close').click(function() {
+      $('.modal').removeClass('is-open');
+    });
+
+    $('.modal').click(function() {
+      $('.modal').removeClass('is-open');
+    });
+
 })();
+
+
+
+
 
 
