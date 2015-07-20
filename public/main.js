@@ -30,6 +30,8 @@
         $scope.searchPods   = '';
     })
 
+    // Modal
+
     $('.PodQuest').click(function() {
       $('.modal').toggleClass('is-open');
     });
