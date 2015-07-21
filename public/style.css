@@ -285,7 +285,7 @@ button:focus {
 
 .modal-content {
 	background-color: #fff;
-	padding: 1em;
+	padding: 2em;
 	border-radius: 5px;
 	max-width: 500px;
 	margin-left: auto;
@@ -297,6 +297,8 @@ button:focus {
 
 .modal-content h1 {
 	border-bottom: solid #ebebeb 1px;
+	padding-bottom: .5em;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .modal.is-open {
@@ -306,6 +308,7 @@ button:focus {
 .close {
 	cursor: pointer;
 	font-size: 26px;
+	margin-top: 1em;
 }
 
 .close:hover {
